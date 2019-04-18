@@ -1,15 +1,15 @@
 const fs = require('fs');
 const express = require('express');
 const multer = require('multer');
-var ffmpeg = require('fluent-ffmpeg');
-var bodyParser = require('body-parser');
+const ffmpeg = require('fluent-ffmpeg');
+const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({"extended": false}));
 app.use(express.static(__dirname + '/public'));
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: function(req, file, callback) {
         const dirName = './movies/';
         addDir(dirName)
