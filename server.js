@@ -11,7 +11,9 @@ app.use(express.static(__dirname + '/public'));
 
 var storage = multer.diskStorage({
     destination: function(req, file, callback) {
-        callback(null, './movies/'); // set the destination
+        const dirName = './movies/';
+        addDir(dirName)
+        callback(null, dirName); // set the destination
     },
     filename: function(req, file, callback) {
         const fileName = './movies/' + file.originalname;
@@ -140,6 +142,12 @@ function doScreenshots(movieFile, imageName = 'screenshot', imageSize = '100%')
             });
     } catch (e) {
         console.log(e);
+    }
+}
+
+function addDir(destpath) {
+    if (!fs.existsSync(destpath)) {
+        fs.mkdirSync(destpath, 0744);
     }
 }
 
