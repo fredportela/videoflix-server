@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>VideoFlix</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">
+        <!--[if gte IE 8]>
+        <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+        <![endif]-->
+    </head>
+    <body style="text-align:center">
+        <div style="width: 800px; margin:0 auto;">
+            <video id='my-video' class='video-js' preload="metadata" controls controlsList="nodownload" preload='auto' width="800"
+                poster='http://localhost:3000/screenshot/2019-01-26_12.40.50.mp4' data-setup='{}'>
+                <source src='http://localhost:3000/movies/2019-01-26_12.40.50.mp4' type='video/mp4'>
+                <p class='vjs-no-js'>
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>
+                </p>
+            </video>    
+        </div>
+        <script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
+    </body>
+</html>
