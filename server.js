@@ -2,12 +2,7 @@ const fs = require('fs');
 const express = require('express');
 const multer = require('multer');
 var ffmpeg = require('fluent-ffmpeg');
-var command = ffmpeg();
 var bodyParser = require('body-parser');
-//var cfenv = require('cfenv');
-//var path = require('path');
-//var stat = require('fs').statSync;
-var zipFolder = require('zip-folder');
 const app = express();
 
 app.use(bodyParser.json());
@@ -131,7 +126,7 @@ function doScreenshots(movieFile, imageName = 'screenshot', imageSize = '100%')
             .takeScreenshots({ 
                 count: 0,
                 filename: `${imageName}.png`,
-                timemarks: [ '00:00:01.000', '1' ], 
+                timemarks: [ '00:00:00.000', '1' ], 
                 size: imageSize ? imageSize : '100%'
             }, destpath)
             .on('filenames', function(filenames) {
@@ -185,16 +180,6 @@ function extsplit(request)
     var value = request;
     nameArray = value.split('.');
     return nameArray;
-}
-
-function makeZip(pathname,zipname){
-    zipFolder(pathname, zipname, function(err) {
-        if(err) {
-            console.log('oh no!', err);
-        } else {
-            console.log('Zip Created...');
-        }
-    });
 }
 
 app.listen(3000, () => console.log('VideoFlix Server!'));
