@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
 const ffmpeg = require('fluent-ffmpeg');
+const converter = require('converter');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -61,15 +62,50 @@ app.get('/movies/:movieName', (req, res) => {
 
 app.post('/upload', app.upload.single('video-upl'), function(req,res) {
     try {
+        const filePath = req.file.path;
         const filnameStringify = JSON.stringify(req.file.path); //Stringify file original name
         const filnameParse = JSON.parse(filnameStringify); //Parsing file Original name
         const filename = extsplit(filnameParse);
         const destpath = './' + toInvertBar(filename[1]);
-
+        
+        const extension = filename[filename.length-1];
+        if(extension && extension != 'mp4') {
+            const newFile = filePath.replace(extension, 'mp4');
+            var command = ffmpeg(filePath)
+                        .output(newFile)
+                        .videoCodec('libx264')
+                        .on('end', function() {
+                            console.log('Finished processing');
+                            if(fs.existsSync(req.file.path)) {
+                                fs.unlinkSync(req.file.path);
+                            }
+                        })
+                        .run();
+            /*
+            command.save(newFile).on('end', function() {
+                if(fs.existsSync(req.file.path)) {
+                    fs.unlinkSync(req.file.path);
+                }
+                console.log('Finished processing');
+            });
+            */
+            req.file.path = newFile;
+            req.file.originalname = req.file.originalname.replace(extension, 'mp4');
+            req.file.fieldname = req.file.fieldname.replace(extension, 'mp4');
+            req.file.filename = req.file.filename.replace(extension, 'mp4');
+            req.file.mimetype = req.file.mimetype.replace(extension, 'mp4');
+        }
+        
         removeDir(destpath);
         doScreenshots(req.file.path, 'thumbnail', '150x150');
         doScreenshots(req.file.path, 'screenshot');
+
+        req.file.thumbnail = 'thumbnail/' + req.file.filename,
+        req.file.screenshot = 'screenshot/' + req.file.filename,
+        req.file.url = 'movies/' + req.file.filename
+        
         res.send(req.file).responseJSON;
+
     } catch (e) {
         console.log(e);
         res.status(404).send({ message: e.msg }).responseJSON;

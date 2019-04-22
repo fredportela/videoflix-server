@@ -4,23 +4,39 @@
         <meta charset="utf-8">
         <title>VideoFlix</title>
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">
+        <link href="video-js.css" rel="stylesheet">
+        <!--<link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">-->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        
         <!--[if gte IE 8]>
         <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
         <![endif]-->
     </head>
     <body style="text-align:center">
         <div style="width: 800px; margin:0 auto;">
-            <video id='my-video' class='video-js' preload="metadata" controls controlsList="nodownload"
-                preload='auto' width="800"
-                poster='screenshot/2019-01-26_12.40.50.mp4' data-setup='{}'>
-                <source src='movies/2019-01-26_12.40.50.mp4' type='video/mp4'>
+            <video id='my-video' class="video-js vjs-default-skin" preload="metadata" controls controlsList="nodownload"
+                preload='auto'
+                poster='http://localhost:4000/screenshot/2019-01-26_12.40.50.mp4'
+                data-setup='{ "aspectRatio":"16:9" }'>
+                <source src='http://localhost:4000/movies/2019-01-26_12.40.50.mp4' type='video/mp4'>
                 <p class='vjs-no-js'>
                     To view this video please enable JavaScript, and consider upgrading to a web browser that
                     <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>
                 </p>
             </video>    
         </div>
+        <div class="mt-3">
+            <form id="files" method="post" enctype="multipart/form-data">
+                <input name="video-upl" type="file" />
+                <button>Submit</button>
+            </form>
+            <div class="mt-3 d-none progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
         <script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
+        <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>
