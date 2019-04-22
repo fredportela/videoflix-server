@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8">
         <title>VideoFlix</title>
-        <base href="" />
+        <base href="/" />
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link href="video-js.css" rel="stylesheet">
+        <script>$('base').attr('href', window.location.href);</script>
         <!--<link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">-->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-        
+        <link href="video-js.css" rel="stylesheet">
         <!--[if gte IE 8]>
         <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
         <![endif]-->
@@ -39,10 +39,5 @@
         <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="script.js"></script>
-        <script>
-            $(function() {
-                $('base').attr('href', window.location.href);
-            });
-        </script>
     </body>
 </html>
