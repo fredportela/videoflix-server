@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
 const ffmpeg = require('fluent-ffmpeg');
-const converter = require('converter');
 const bodyParser = require('body-parser');
 const app = express();
 
