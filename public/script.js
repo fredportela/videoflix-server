@@ -26,7 +26,8 @@ $(function() {
 
     $("form#files").submit(function(){
         var formData = new FormData($(this)[0]);
-    
+		console.log(window.location.href + 'upload');
+		return false;
         $.ajax({
             url: window.location.href + 'upload',
             type: 'POST',
